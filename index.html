@@ -1,0 +1,152 @@
+<!DOCTYPE html><html lang="en"><head>
+  
+  
+  <meta charset="UTF-8">
+  <title>Build a Crystal Growth Progress Indicator (Source Code)</title>
+  <style>
+    body { background: #f8fafc; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif;}
+    
+    .base-rock {
+      width: 150px;
+      height: 40px;
+      background: #475569;
+      border-radius: 10px;
+      position: relative;
+      margin-bottom: 40px;
+    }
+    
+    /* Crystal Shards */
+    .shard {
+      position: absolute;
+      bottom: 10px; /* Anchored in the rock */
+      background: linear-gradient(135deg, #a78bfa, #fbcfe8);
+      /* Geometric diamond shape */
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      transform: scale(0);
+      transform-origin: bottom center;
+      transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+    }
+    
+    .s1 { width: 30px; height: 80px; left: 20px; }
+    .s2 { width: 40px; height: 120px; left: 55px; background: linear-gradient(135deg, #818cf8, #bae6fd); z-index: 2;}
+    .s3 { width: 35px; height: 90px; right: 20px; background: linear-gradient(135deg, #f472b6, #e9d5ff);}
+    .s4 { width: 25px; height: 60px; right: 5px; z-index: 3;}
+    
+    /* Stage Activation */
+    .base-rock[data-stage="1"] .s1 { transform: scale(1) rotate(-15deg); }
+    
+    .base-rock[data-stage="2"] .s1 { transform: scale(1) rotate(-15deg); }
+    .base-rock[data-stage="2"] .s3 { transform: scale(1) rotate(20deg); }
+    
+    .base-rock[data-stage="3"] .s1 { transform: scale(1) rotate(-15deg); }
+    .base-rock[data-stage="3"] .s3 { transform: scale(1) rotate(20deg); }
+    .base-rock[data-stage="3"] .s2 { transform: scale(1) rotate(5deg); }
+    .base-rock[data-stage="3"] .s4 { transform: scale(1) rotate(35deg); }
+    
+    button { padding: 12px 24px; font-weight: bold; background: #8b5cf6; color: white; border: none; border-radius: 8px; cursor: pointer;}
+  </style>
+
+            <meta name="description" content="A beautiful component imported via Developer Studio AI.">
+            <meta name="robots" content="index, follow">
+            <meta property="og:title" content="Build a Crystal Growth Progress Indicator (Source Code)">
+            <meta property="og:description" content="A beautiful component imported via Developer Studio AI.">
+            <meta property="og:image" content="https://codescompiler.com/images/posts/css-crystal-growth-progress.png">
+            <meta name="twitter:card" content="summary_large_image">
+            <meta name="twitter:title" content="Build a Crystal Growth Progress Indicator (Source Code)">
+            <meta name="twitter:description" content="A beautiful component imported via Developer Studio AI.">
+            <meta name="twitter:image" content="https://codescompiler.com/images/posts/css-crystal-growth-progress.png">
+          </head>
+<body>
+
+<!-- ── CODESCOMPILER DEMO HEADER ── -->
+<style>
+  #cc-demo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    height: 48px;
+    background: #1a1b26;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: white;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999999;
+  }
+  #cc-demo-header a { text-decoration: none; color: white; }
+  .cc-logo { font-size: 14px; font-weight: 900; }
+  .cc-logo span { color: #04aa6d; }
+  .cc-sep { width: 1px; height: 20px; background: rgba(255,255,255,0.12); margin: 0 12px; }
+  .cc-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.65); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cc-actions { display: flex; gap: 8px; }
+  .cc-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: rgba(255,255,255,0.7);
+  }
+  .cc-btn:hover { background: rgba(255,255,255,0.15); color: white; }
+  .cc-btn svg { width: 14px; height: 14px; }
+  @media (max-width: 600px) {
+    .cc-title { display: none; }
+    .cc-btn span { display: none; }
+  }
+</style>
+<header id="cc-demo-header">
+  <div style="display: flex; align-items: center; overflow: hidden;">
+    <a href="https://codescompiler.com" class="cc-logo" target="_blank" rel="dofollow"><span>Codes</span>Compiler</a>
+    <div class="cc-sep"></div>
+    <h1 class="cc-title" title="Build a Crystal Growth Progress Indicator (Source Code)" style="margin: 0; font-size: 13px; font-weight: 600;">📺 Build a Crystal Growth Progress Indicator (Source Code)</h1>
+  </div>
+  <div class="cc-actions">
+    <a href="https://codescompiler.com/blog/css-crystal-growth-progress" class="cc-btn" target="_blank" rel="dofollow" title="Read the full post">
+      <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+      <span>Back to Post</span>
+    </a>
+    <a href="index.html" class="cc-btn" target="_blank" download="css-crystal-growth-progress.html" title="Download source file">
+      <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+      <span>Download</span>
+    </a>
+    <button onclick="document.getElementById('cc-demo-header').style.display='none'" class="cc-btn" title="Hide header for fullscreen view">
+      <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l5-5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+      <span>Fullscreen</span>
+    </button>
+  </div>
+</header>
+<!-- ================================== -->
+
+  <div class="base-rock" id="rock" data-stage="0">
+    <div class="shard s1"></div>
+    <div class="shard s2"></div>
+    <div class="shard s3"></div>
+    <div class="shard s4"></div>
+  </div>
+  
+  <button onclick="mine()">Mine Data (Load)</button>
+
+  <script>
+    let stage = 0;
+    function mine() {
+      stage++;
+      if(stage > 3) stage = 0; // reset for demo purposes
+      document.getElementById('rock').setAttribute('data-stage', stage.toString());
+      if(stage === 3) document.querySelector('button').innerText = "Fully Crystalized! (Reset)";
+      else document.querySelector('button').innerText = "Mine Data (Load)";
+    }
+  </script>
+
+
+</body></html>
